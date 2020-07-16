@@ -1,5 +1,7 @@
 package org.xpdojo.bank;
 
+import Exceptions.AmountException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +36,30 @@ public class AccountTest {
 
         assertThat(account.getBalance()).isEqualTo(35);
 
+    }
+
+
+    @Test()
+    public void transferAmountsBetweenAccountsFaules() {
+
+        Assertions.assertThrows(AmountException.class, () -> {
+            Account accountA = new Account();
+            Account accountB = new Account();
+
+            accountA.trasferAmoutTo(accountB, 10);
+        });
+    }
+
+    @Test
+    public void transferAmountsBetweenAccountsWorks() {
+        Account accountA = new Account();
+        accountA.setBalance(10);
+
+        Account accountB = new Account();
+
+        accountA.trasferAmoutTo(accountB, 10);
+
+        assertThat(accountA.getBalance()).isEqualTo(0);
+        assertThat(accountB.getBalance()).isEqualTo(10);
     }
 }
