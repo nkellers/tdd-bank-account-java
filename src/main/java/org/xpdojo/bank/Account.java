@@ -16,4 +16,7 @@ public class Account {
         setBalance(this.getBalance() + amount);
     }
 
+    public void withdraw(int amount) {
+        setBalance(this.getBalance()-amount);
+    }
 }
