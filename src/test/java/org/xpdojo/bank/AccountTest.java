@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
@@ -62,4 +65,13 @@ public class AccountTest {
         assertThat(accountA.getBalance()).isEqualTo(0);
         assertThat(accountB.getBalance()).isEqualTo(10);
     }
+
+    @Test
+    public void printAccountBalance(){
+        Account accountA = new Account();
+        accountA.setBalance(10);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+
+        assertThat(accountA.printBalance()).isEqualTo(String.format("Your balance at %s is %s EUR", dtf.format(now), 10));    }
 }
